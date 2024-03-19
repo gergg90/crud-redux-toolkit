@@ -1,90 +1,88 @@
-// 'use client';
 import {
-  Badge,
+  Card,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeaderCell,
   TableRow,
-  Title,
 } from "@tremor/react";
 import { useAppSelector } from "../hooks/useStore";
-import { DeleteIcon, EditIcon } from "./Icons";
+import {
+  DeleteIcon,
+  EditIcon,
+  UserOfflineIcon,
+  UserOnlineIcon,
+  UsersIcon,
+} from "./Icons";
 
-export default function ListOfUsers() {
+function ListOfUsers() {
   const users = useAppSelector((state) => state.users);
 
   return (
-    <>
-      <div className="sm:flex sm:items-center sm:justify-between sm:space-x-10">
-        <div>
-          <p className="mt-1 text-tremor-default leading-6 text-tremor-content dark:text-dark-tremor-content">
-            Esto es un proyecto de como agregar, modificar y eliminar usuarios.
-            El proyecto se realizo con react, redux-toolkit como manejador de
-            estados, tailwindcss para los estilos y como librearia de
-            componentes se utilizo tremor.
-          </p>
-        </div>
-        <button
-          type="button"
-          className="mt-4 w-full whitespace-nowrap rounded-tremor-small bg-tremor-brand px-4 py-2.5 text-tremor-default font-medium text-tremor-brand-inverted shadow-tremor-input hover:bg-tremor-brand-emphasis dark:bg-dark-tremor-brand dark:text-dark-tremor-brand-inverted dark:shadow-dark-tremor-input dark:hover:bg-dark-tremor-brand-emphasis sm:mt-0 sm:w-fit"
-        >
-          Agregar Usuarios
-        </button>
-      </div>
-      <Table className="mt-8">
+    <Card>
+      <h3 className="text-tremor-content-strong text-lg text-indigo-600 dark:text-dark-tremor-content-strong font-semibold ">
+        <UsersIcon /> Users: {users.length}
+      </h3>
+
+      <Table className="mt-5">
         <TableHead>
-          <TableRow className="border-b border-tremor-border dark:border-dark-tremor-border">
-            <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
-              Id
+          <TableRow>
+            <TableHeaderCell className="text-lg text-indigo-600">
+              ID
             </TableHeaderCell>
-            <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
-              Nombre
+            <TableHeaderCell className="text-lg text-indigo-600">
+              Name
             </TableHeaderCell>
-            <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
+            <TableHeaderCell className="text-lg text-indigo-600">
               Email
             </TableHeaderCell>
-            <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
-              Acciones
+            <TableHeaderCell className="text-lg text-indigo-600">
+              Online
+            </TableHeaderCell>
+            <TableHeaderCell className="text-lg text-indigo-600">
+              Actions:
             </TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          <Title className="font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
-            Usuarios:
-            <Badge className="m-2 rounded-full bg-indigo-500">
-              {users.length}
-            </Badge>
-          </Title>
+          {users.map((user) => {
+            const checkStatusUser = user.status;
 
-          {users.map((user) => (
-            <TableRow key={user.id}>
-              <TableCell className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                {user.id}
-              </TableCell>
-              <TableCell className="flex content-between gap-2 items-center">
-                <img
-                  className="rounded-full"
-                  style={{ height: "32px", width: "32px" }}
-                  src={`https://unavatar.io/github/${user.github}`}
-                  alt={user.name}
-                />
-                {user.name}
-              </TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>
-                <button type="button">
-                  <EditIcon />
-                </button>
-                <button type="button">
-                  <DeleteIcon />
-                </button>
-              </TableCell>
-            </TableRow>
-          ))}
+            return (
+              <TableRow key={user.id}>
+                <TableCell>{user.id}</TableCell>
+                <TableCell>
+                  <div className="flex gap-3 items-center">
+                    <img
+                      className="rounded-full border-2 border-indigo-600 h-10 w-10 object-cover transform hover:scale-150 transition-transform duration-300 ease-in-out "
+                      src={`https://unavatar.io/github/${user.github}/`}
+                    />
+                    {user.name}
+                  </div>
+                </TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>
+                  {checkStatusUser ? <UserOnlineIcon /> : <UserOfflineIcon />}
+                </TableCell>
+
+                <TableCell>
+                  <div className="flex gap-2">
+                    <button>
+                      <EditIcon />
+                    </button>
+                    <button>
+                      <DeleteIcon />
+                    </button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
-    </>
+    </Card>
   );
 }
+
+export default ListOfUsers;
