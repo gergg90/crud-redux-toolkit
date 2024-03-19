@@ -1,53 +1,24 @@
 // 'use client';
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeaderCell,
-    TableRow,
+  Badge,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeaderCell,
+  TableRow,
+  Title,
 } from "@tremor/react";
-
-const users: {
-  id: string;
-  name: string;
-  email: string;
-  github: string;
-}[] = [
-  {
-    id: "1",
-    name: "Germain Gutierrez",
-    email: "germain.gg90@gmail.com",
-    github: "gergg90",
-  },
-  {
-    id: "2",
-    name: "Jess Moreno",
-    email: "jess90@gmail.com",
-    github: "lajesys",
-  },
-  {
-    id: "3",
-    name: "Chimuelito Care verga",
-    email: "elchimu@gmail.com",
-    github: "chumueloidecareverga",
-  },
-  {
-    id: "4",
-    name: "Pelusa",
-    email: "pelujita@gmail.com",
-    github: "lapelu",
-  },
-];
+import { useAppSelector } from "../hooks/useStore";
+import { DeleteIcon, EditIcon } from "./Icons";
 
 export default function ListOfUsers() {
+  const users = useAppSelector((state) => state.users);
+
   return (
     <>
       <div className="sm:flex sm:items-center sm:justify-between sm:space-x-10">
         <div>
-          <h3 className="font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
-            Usuarios
-          </h3>
           <p className="mt-1 text-tremor-default leading-6 text-tremor-content dark:text-dark-tremor-content">
             Esto es un proyecto de como agregar, modificar y eliminar usuarios.
             El proyecto se realizo con react, redux-toolkit como manejador de
@@ -69,25 +40,47 @@ export default function ListOfUsers() {
               Id
             </TableHeaderCell>
             <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
-              Name
+              Nombre
             </TableHeaderCell>
             <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
               Email
             </TableHeaderCell>
             <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
-              Github
+              Acciones
             </TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
+          <Title className="font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+            Usuarios:
+            <Badge className="m-2 rounded-full bg-indigo-500">
+              {users.length}
+            </Badge>
+          </Title>
+
           {users.map((user) => (
             <TableRow key={user.id}>
               <TableCell className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
                 {user.id}
               </TableCell>
-              <TableCell>{user.name}</TableCell>
+              <TableCell className="flex content-between gap-2 items-center">
+                <img
+                  className="rounded-full"
+                  style={{ height: "32px", width: "32px" }}
+                  src={`https://unavatar.io/github/${user.github}`}
+                  alt={user.name}
+                />
+                {user.name}
+              </TableCell>
               <TableCell>{user.email}</TableCell>
-              <TableCell>{user.github}</TableCell>
+              <TableCell>
+                <button type="button">
+                  <EditIcon />
+                </button>
+                <button type="button">
+                  <DeleteIcon />
+                </button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
