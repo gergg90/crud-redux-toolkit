@@ -44,16 +44,16 @@ const initialState: UserWithId[] = [
   },
   {
     id: "5",
-    name: "meshtastic",
-    email: "meshtastic@gmail.com",
-    github: "meshtastic",
+    name: "ArisGuimera",
+    email: "ArisGuimera@gmail.com",
+    github: "ArisGuimera",
     status: true,
   },
   {
     id: "6",
-    name: "svgdotjs",
-    email: "svgdotjs@gmail.com",
-    github: "svgdotjs",
+    name: "s4vitar",
+    email: "s4vitar@gmail.com",
+    github: "s4vitar",
     status: false,
   },
 ];

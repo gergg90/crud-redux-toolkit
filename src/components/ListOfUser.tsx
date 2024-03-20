@@ -7,7 +7,7 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@tremor/react";
-import { useAppDistpach, useAppSelector } from "../hooks/useStore";
+import { useAppSelector } from "../hooks/useStore";
 import {
   DeleteIcon,
   EditIcon,
@@ -16,15 +16,12 @@ import {
   UsersIcon,
 } from "./Icons";
 
-import { deleteUsersById, UserId } from "../store/users/usersSlice";
+import { useUserActions } from "../hooks/useUserActions";
 
 function ListOfUsers() {
   const users = useAppSelector((state) => state.users);
-  const distpach = useAppDistpach();
 
-  const handleRemoveUser = (id: UserId) => {
-    distpach(deleteUsersById(id));
-  };
+  const { removeUser } = useUserActions();
 
   return (
     <Card>
@@ -81,7 +78,7 @@ function ListOfUsers() {
                     <button
                       type="button"
                       onClick={() => {
-                        handleRemoveUser(user.id);
+                        removeUser(user.id);
                       }}
                     >
                       <DeleteIcon />
