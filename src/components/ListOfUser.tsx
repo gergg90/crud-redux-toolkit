@@ -6,6 +6,7 @@ import {
   TableHead,
   TableHeaderCell,
   TableRow,
+  Text,
 } from "@tremor/react";
 import { useAppSelector } from "../hooks/useStore";
 import {
@@ -24,11 +25,11 @@ function ListOfUsers() {
   const { removeUser } = useUserActions();
 
   return (
-    <Card>
-      <h3 className="text-tremor-content-strong text-lg text-indigo-600 dark:text-dark-tremor-content-strong font-semibold ">
-        <UsersIcon /> Users: {users.length}
-      </h3>
-
+    <Card className="rounded-md">
+      <UsersIcon />
+      <Text className="text-tremor-content-strong  dark:text-dark-tremor-content-strong font-semibold ">
+        Users: {users.length}
+      </Text>
       <Table className="mt-5">
         <TableHead>
           <TableRow>
