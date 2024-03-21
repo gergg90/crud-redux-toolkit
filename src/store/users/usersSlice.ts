@@ -2,18 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 export type UserId = string;
 
-export interface User {
-  name: string;
-  email: string;
-  github: string;
-  status: boolean;
-}
-
-export interface UserWithId extends User {
-  id: UserId;
-}
-
-const initialState: UserWithId[] = [
+const DEFAULT_STATE = [
   {
     id: "1",
     name: "Germain Gutierrez",
@@ -57,6 +46,24 @@ const initialState: UserWithId[] = [
     status: false,
   },
 ];
+
+export interface User {
+  name: string;
+  email: string;
+  github: string;
+  status: boolean;
+}
+
+export interface UserWithId extends User {
+  id: UserId;
+}
+
+const initialState: UserWithId[] = (() => {
+  const persistedState = window.localStorage.getItem("users");
+
+  return persistedState ? JSON.parse(persistedState).users : DEFAULT_STATE;
+})();
+
 export const usersSlice = createSlice({
   name: "users",
   initialState,
