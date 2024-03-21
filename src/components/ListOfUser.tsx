@@ -22,7 +22,7 @@ import { useUserActions } from "../hooks/useUserActions";
 function ListOfUsers() {
   const users = useAppSelector((state) => state.users);
 
-  const { removeUser } = useUserActions();
+  const { removeUserFromHook } = useUserActions();
 
   return (
     <Card className="rounded-md">
@@ -79,7 +79,7 @@ function ListOfUsers() {
                     <button
                       type="button"
                       onClick={() => {
-                        removeUser(user.id);
+                        removeUserFromHook(user.id);
                       }}
                     >
                       <DeleteIcon />
