@@ -2,50 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 export type UserId = string;
 
-const DEFAULT_STATE = [
-  {
-    id: "1",
-    name: "Germain Gutierrez",
-    email: "germain.gg90@gmail.com",
-    github: "gergg90",
-    status: true,
-  },
-  {
-    id: "2",
-    name: "FaztWeb",
-    email: "fazt@gmail.com",
-    github: "fazt",
-    status: false,
-  },
-  {
-    id: "3",
-    name: "Midu",
-    email: "midu@gmail.com",
-    github: "midudev",
-    status: true,
-  },
-  {
-    id: "4",
-    name: "Brais Moure",
-    email: "brais@gmail.com",
-    github: "mouredev",
-    status: false,
-  },
-  {
-    id: "5",
-    name: "ArisGuimera",
-    email: "ArisGuimera@gmail.com",
-    github: "ArisGuimera",
-    status: true,
-  },
-  {
-    id: "6",
-    name: "s4vitar",
-    email: "s4vitar@gmail.com",
-    github: "s4vitar",
-    status: false,
-  },
-];
+const DEFAULT_STATE: UserWithId[] = [];
 
 export interface User {
   name: string;
