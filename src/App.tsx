@@ -8,7 +8,7 @@ function App() {
     <>
       <CreateUser />
       <ListOfUsers />
-      <Toaster richColors />
+      <Toaster className="bg-slate-950" position="bottom-center" />
     </>
   );
 }
